@@ -2,23 +2,29 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-
+import { useAudio } from "./AudioProvider";
 import GlassPlayer from "./GlassPlayer";
 import { PlayIcon, PauseIcon } from "./PlayerIcons";
 import Emoji from "@/components/ui/Emoji";
 import WaveBars from "./WaveBars";
 
 interface Props {
-  playing: boolean;
-  onPlayPause: () => void;
   onExpand: () => void;
 }
 
 export default function MiniPlayer({
-  playing,
-  onPlayPause,
   onExpand,
 }: Props) {
+  const {
+    playing,
+    setPlaying,
+    currentSong,
+  } = useAudio();
+
+  const onPlayPause = () => {
+    setPlaying(!playing);
+  };
+
   return (
     <motion.div
       layoutId="music-player"
@@ -54,8 +60,8 @@ export default function MiniPlayer({
               className="relative h-16 w-16 overflow-hidden rounded-full border border-white/15"
             >
               <Image
-  src="/images/hero.jpg"
-  alt="Album"
+  src={currentSong.cover}
+  alt={currentSong.title}
   fill
   sizes="(max-width: 768px) 100vw, 320px"
   className="object-cover"
@@ -72,7 +78,7 @@ export default function MiniPlayer({
                 />
 
                 <h3 className="font-semibold text-white">
-                  Perfect
+                  {currentSong.title}
                 </h3>
 
               </div>
@@ -86,7 +92,7 @@ export default function MiniPlayer({
 
                 <div className="mt-1 flex items-center gap-2">
   <p className="text-sm text-pink-300">
-    Ed Sheeran
+    {currentSong.artist}
   </p>
 
   <WaveBars playing={playing} />

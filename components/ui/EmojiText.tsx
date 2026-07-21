@@ -1,9 +1,9 @@
 "use client";
 
-import Emoji from "./Emoji";
+import Emoji, { type EmojiName } from "./Emoji";
 
 
-const map: Record<string, any> = {
+const map: Partial<Record<string, EmojiName>> = {
   "❤️": "heart",
   "🤍": "heartDecoration",
   "💖": "pinkHeart",

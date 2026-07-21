@@ -64,7 +64,7 @@ export default function Ending() {
           every late-night conversation,
           every laugh,
           every memory,
-          and every dream we've shared.
+          and every dream we&apos;ve shared.
         </motion.p>
 
         <motion.div

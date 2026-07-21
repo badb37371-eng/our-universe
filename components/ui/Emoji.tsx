@@ -1,6 +1,5 @@
 "use client";
 
-import EmojiText from "@/components/ui/EmojiText";
 import Image from "next/image";
 
 const emojiMap = {

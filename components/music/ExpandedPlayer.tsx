@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-
+import { useAudio } from "./AudioProvider";
 import GlassPlayer from "./GlassPlayer";
 import WaveBars from "./WaveBars";
 import ProgressBar from "./ProgressBar";
@@ -19,16 +19,20 @@ import {
 import Emoji from "@/components/ui/Emoji";
 
 interface Props {
-  playing: boolean;
-  onPlayPause: () => void;
   onClose: () => void;
 }
 
 export default function ExpandedPlayer({
-  playing,
-  onPlayPause,
   onClose,
 }: Props) {
+  const {
+  playing,
+  setPlaying,
+  currentSong,
+  previousSong,
+  nextSong,
+} = useAudio();
+
   return (
     <motion.div
       layoutId="music-player"
@@ -42,7 +46,7 @@ export default function ExpandedPlayer({
       }}
       className="fixed bottom-6 right-6 z-[999]"
     >
-      <GlassPlayer className="w-[430px] p-8">
+      <GlassPlayer className="w-[360px] p-6">
         {/* Close */}
         <div className="flex justify-end">
           <button
@@ -65,7 +69,7 @@ export default function ExpandedPlayer({
               repeat: Infinity,
               duration: 3,
             }}
-            className="absolute h-80 w-80 rounded-full bg-pink-500/20 blur-[90px]"
+            className="absolute h-64 w-64 rounded-full bg-pink-500/20 blur-[70px]"
           />
 
           <motion.div
@@ -87,8 +91,8 @@ export default function ExpandedPlayer({
   }}
   className="
     relative
-    h-72
-    w-72
+    h-56
+    w-56
     overflow-hidden
     rounded-full
     border
@@ -114,8 +118,8 @@ export default function ExpandedPlayer({
 </div>
 
             <Image
-  src="/images/hero.jpg"
-  alt="Perfect"
+  src={currentSong.cover}
+  alt={currentSong.title}
   fill
   sizes="(max-width: 768px) 100vw, 320px"
   className="object-cover"
@@ -158,16 +162,16 @@ export default function ExpandedPlayer({
           <div className="flex items-center justify-center gap-2">
             <Emoji name="music" size={24} />
 
-            <h2 className="text-4xl font-black tracking-tight text-white">
-              Perfect
+            <h2 className="text-3xl font-black tracking-tight text-white">
+              {currentSong.title}
             </h2>
           </div>
 
           <div className="mt-3 flex items-center justify-center gap-2">
             <Emoji name="heart" size={20} />
 
-            <p className="text-lg font-medium text-pink-300">
-              Ed Sheeran
+            <p className="text-base font-medium text-pink-300">
+              {currentSong.artist}
             </p>
           </div>
         </div>
@@ -181,47 +185,37 @@ export default function ExpandedPlayer({
         </div>
 
         {/* Controls */}
-        <div className="mt-10 flex items-center justify-center gap-8">
+        <div className="mt-10 flex items-center justify-center gap-6">
           <motion.button
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.92 }}
-            className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 backdrop-blur-xl"
+         whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.92 }}
+         onClick={previousSong}
+          className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 backdrop-blur-xl"
           >
             <PreviousIcon className="h-7 w-7 text-white" />
           </motion.button>
 
           <motion.button
-            whileTap={{ scale: 0.9 }}
-            whileHover={{ scale: 1.08 }}
-            onClick={onPlayPause}
-            className="
-              flex
-              h-24
-              w-24
-              items-center
-              justify-center
-              rounded-full
-              bg-gradient-to-br
-              from-pink-500
-              via-fuchsia-500
-              to-purple-600
-              shadow-[0_0_45px_rgba(236,72,153,.55)]
-            "
-          >
-            {playing ? (
-              <PauseIcon className="h-12 w-12 text-white" />
-            ) : (
-              <PlayIcon className="ml-1 h-12 w-12 text-white" />
-            )}
-          </motion.button>
+  whileHover={{ scale: 1.08 }}
+  whileTap={{ scale: 0.92 }}
+  onClick={() => setPlaying(!playing)}
+  className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 backdrop-blur-xl"
+>
+  {playing ? (
+    <PauseIcon className="h-12 w-12 text-white" />
+  ) : (
+    <PlayIcon className="ml-1 h-12 w-12 text-white" />
+  )}
+</motion.button>
 
           <motion.button
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.92 }}
-            className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 backdrop-blur-xl"
-          >
-            <NextIcon className="h-7 w-7 text-white" />
-          </motion.button>
+  whileHover={{ scale: 1.08 }}
+  whileTap={{ scale: 0.92 }}
+  onClick={nextSong}
+  className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 backdrop-blur-xl"
+>
+  <NextIcon className="h-7 w-7 text-white" />
+</motion.button>
         </div>
 
         {/* Volume */}

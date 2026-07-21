@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import GlassCard from "../ui/GlassCard";
 import Emoji from "@/components/ui/Emoji";
 
+
 export default function Hero() {
   const { playing } = useAudio();
 

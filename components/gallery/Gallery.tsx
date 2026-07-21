@@ -19,7 +19,7 @@ export default function Gallery() {
 
       <SectionTitle
         title="Our Gallery"
-        subtitle="A collection of moments I'll cherish forever."
+        subtitle="A collection of moments I&apos;ll cherish forever."
         leftEmoji="camera"
         rightEmoji="sparkles"
       />

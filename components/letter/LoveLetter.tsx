@@ -33,16 +33,16 @@ export default function LoveLetter() {
       <p className="mt-8 text-lg leading-10">
         Today marks three beautiful years of us.
         Thank you for every smile, every late-night conversation,
-        every moment of support, and every memory we've created together.
+        every moment of support, and every memory we&apos;ve created together.
       </p>
 
       <p className="mt-8 text-lg leading-10">
         No matter how many kilometers separate us,
-        you've always been the closest person to my heart.
+        you&apos;ve always been the closest person to my heart.
       </p>
 
       <p className="mt-8 text-lg leading-10">
-        I don't know what the future holds,
+        I Don&apos;t know what the future holds,
         but I know one thing —
         I want you in every chapter of it.
       </p>

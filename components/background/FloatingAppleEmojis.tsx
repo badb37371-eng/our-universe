@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/set-state-in-effect */
+
 "use client";
 
 import { motion } from "framer-motion";
@@ -8,23 +10,11 @@ import { useAudio } from "@/components/music/AudioProvider";
 const emojis = [
   "heart",
   "pinkHeart",
-  "flower",
-  "rose",
   "sparkles",
-  "stars",
   "butterfly",
   "moon",
-  "cloud",
-  "hibiscus",
-  "tulip",
-  "rainbow",
-  "leaf",
+  "rose",
 ] as const;
-
-export default function FloatingAppleEmojis() {
-  const { playing } = useAudio();
-
-  const total = playing ? 36 : 14;
 
 type FloatingEmoji = {
   emoji: (typeof emojis)[number];
@@ -35,60 +25,71 @@ type FloatingEmoji = {
   delay: number;
 };
 
-const [floatingEmojis, setFloatingEmojis] = useState<FloatingEmoji[]>([]);
+export default function FloatingAppleEmojis() {
+  const { playing } = useAudio();
 
-useEffect(() => {
-  const generated = Array.from({ length: total }).map((_, i) => ({
-    emoji: emojis[i % emojis.length],
-    left: Math.random() * 100,
-    top: Math.random() * 100,
-    duration: 4 + Math.random() * 6,
-    size: 18 + Math.random() * 20,
-    delay: i * 0.15,
-  }));
+  const total = playing ? 18 : 8;
 
-  setFloatingEmojis(generated);
-}, [total]);
+  const [floatingEmojis, setFloatingEmojis] = useState<FloatingEmoji[]>([]);
 
-if (floatingEmojis.length === 0) return null;
+  useEffect(() => {
+    const generated = Array.from({ length: total }).map((_, i) => {
+  // Randomly choose left or right edge
+  const isLeft = Math.random() < 0.5;
+
+  const left = isLeft
+    ? 2 + Math.random() * 12
+    : 86 + Math.random() * 12;
+
+  // Spread emojis evenly from top to bottom
+  const top = 10 + Math.random() * 80;
+
+  return {
+    emoji: emojis[Math.floor(Math.random() * emojis.length)],
+    left,
+    top,
+    duration: 8 + Math.random() * 8,
+    size: 18 + Math.random() * 14,
+    delay: i * 0.35,
+  };
+});
+
+    setFloatingEmojis(generated);
+  }, [total]);
+
+  if (!floatingEmojis.length) return null;
 
   return (
     <>
-      {floatingEmojis.map((item, i) => {
-       const emoji = item.emoji;
-
-        return (
-          <motion.div
-            key={i}
-            className="pointer-events-none fixed z-[2]"
-            style={{
-              left: `${item.left}%`,
-              top: `${item.top}%`,
-            }}
-            animate={{
-              y: [-20, 20, -20],
-              x: [-8, 8, -8],
-              rotate: [-15, 15, -15],
-              opacity: playing
-                ? [0.45, 1, 0.45]
-                : [0.25, 0.55, 0.25],
-              scale: playing
-                ? [0.9, 1.25, 0.9]
-                : [0.8, 1, 0.8],
-            }}
-            transition={{
-              duration: item.duration,
-              repeat: Infinity,
-               delay: item.delay,
-            }}
-          >
-            <Emoji
-              name={emoji}
-              size={item.size}
-            />
-          </motion.div>
-        );
-      })}
+      {floatingEmojis.map((item, i) => (
+        <motion.div
+          key={i}
+          className="pointer-events-none fixed z-[2]"
+          style={{
+            left: `${item.left}%`,
+            top: `${item.top}%`,
+          }}
+          animate={{
+            y: [-10, 10, -10],
+            x: [-4, 4, -4],
+            rotate: [-6, 6, -6],
+            opacity: playing
+              ? [0.35, 0.75, 0.35]
+              : [0.18, 0.45, 0.18],
+            scale: playing
+              ? [0.95, 1.1, 0.95]
+              : [0.9, 1, 0.9],
+          }}
+          transition={{
+            duration: item.duration,
+            repeat: Infinity,
+            delay: item.delay,
+            ease: "easeInOut",
+          }}
+        >
+          <Emoji name={item.emoji} size={item.size} />
+        </motion.div>
+      ))}
     </>
   );
 }

@@ -23,18 +23,31 @@ export default function MemoryCard({ memory }: Props) {
       initial={{ opacity: 0, y: 80 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.9 }}
+      transition={{
+  duration: 1,
+  ease: "easeOut",
+}}
       className="mx-auto mb-28 max-w-5xl px-6"
     >
       <motion.div
         whileHover={{
-          y: -6,
-          scale: 1.01,
-        }}
-        transition={{
-          duration: 0.35,
-        }}
-        className="overflow-hidden rounded-[36px] border border-white/10 bg-white/5 backdrop-blur-3xl shadow-2xl"
+  y: -10,
+  scale: 1.02,
+}}
+transition={{
+  duration: 0.45,
+  ease: "easeOut",
+}}
+        className="
+relative
+overflow-hidden
+rounded-[36px]
+border
+border-white/15
+bg-white/[0.06]
+backdrop-blur-[35px]
+shadow-[0_25px_80px_rgba(0,0,0,0.45)]
+"
       >
         {/* Media */}
 
@@ -47,7 +60,16 @@ export default function MemoryCard({ memory }: Props) {
               width={1600}
               height={900}
               priority={false}
-              className="h-auto w-full object-contain transition duration-700 hover:scale-[1.03]"
+              className="
+h-auto
+w-full
+object-contain
+transition-all
+duration-1000
+ease-out
+hover:scale-[1.06]
+hover:brightness-110
+"
             />
           ) : (
             <video
@@ -60,6 +82,18 @@ export default function MemoryCard({ memory }: Props) {
               className="h-auto w-full object-contain"
             />
           )}
+
+          <div
+  className="
+    pointer-events-none
+    absolute
+    inset-0
+    bg-gradient-to-t
+    from-black/35
+    via-transparent
+    to-transparent
+  "
+/>
 
         </div>
 

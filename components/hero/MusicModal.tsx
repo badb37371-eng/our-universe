@@ -45,7 +45,7 @@ export default function MusicModal({
 
           <div className="flex items-center justify-center gap-2">
             <Emoji name="pleading" size={22} />
-            <span>There's a song...</span>
+            <span>There&apos;s a song...</span>
           </div>
 
           <div className="flex items-center justify-center gap-2">
@@ -72,7 +72,7 @@ export default function MusicModal({
         >
           <span className="flex items-center justify-center gap-3">
             <Emoji name="music" size={22} />
-            <span>Play "Perfect"</span>
+            <span>Play &quot;Perfect&quot;</span>
             <Emoji name="heart" size={22} />
           </span>
         </button>

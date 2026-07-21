@@ -15,7 +15,7 @@ export default function LetterSection() {
 
       <SectionTitle
         title="A Letter For You"
-        subtitle="Something I've wanted to tell you."
+        subtitle="Something I&apos;ve wanted to tell you."
         leftEmoji="letter"
         rightEmoji="heart"
       />

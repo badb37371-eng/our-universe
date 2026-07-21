@@ -48,29 +48,31 @@ export default function LiquidGlass({
 
       {/* Glass Reflection */}
       <motion.div
-        animate={{
-          x: ["-120%", "120%"],
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 7,
-          ease: "linear",
-        }}
-        className="
-          absolute
-          top-0
-          left-0
-          h-full
-          w-1/3
-          -skew-x-12
-          bg-gradient-to-r
-          from-transparent
-          via-white/20
-          to-transparent
-          blur-xl
-          pointer-events-none
-        "
-      />
+  animate={{
+    x: ["-160%", "180%"],
+    opacity: [0, 0.18, 0.3, 0.18, 0],
+  }}
+  transition={{
+    duration: 5,
+    repeat: Infinity,
+    repeatDelay: 6,
+    ease: "easeInOut",
+  }}
+  className="
+    absolute
+    top-0
+    left-0
+    h-full
+    w-40
+    -skew-x-12
+    bg-gradient-to-r
+    from-transparent
+    via-white/30
+    to-transparent
+    blur-2xl
+    pointer-events-none
+  "
+/>
 
       {/* Top Highlight */}
       <div

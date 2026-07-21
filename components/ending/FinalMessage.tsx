@@ -25,7 +25,7 @@ export default function FinalMessage() {
       <p className="mt-10 text-2xl leading-10 text-gray-200">
         No matter where life takes us...
         <br />
-        I'll always choose you.
+        I&apos;ll always choose you.
       </p>
 
       <div className="mt-12 text-pink-300">

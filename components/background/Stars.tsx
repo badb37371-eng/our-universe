@@ -8,6 +8,7 @@ type Star = {
   top: number;
   left: number;
   size: number;
+  opacity: number;
   duration: number;
   delay: number;
 };
@@ -16,16 +17,29 @@ export default function Stars() {
   const [stars, setStars] = useState<Star[]>([]);
 
   useEffect(() => {
-    const generatedStars = Array.from({ length: 120 }, (_, i) => ({
+    const generated = Array.from({ length: 160 }, (_, i) => ({
       id: i,
       top: Math.random() * 100,
       left: Math.random() * 100,
-      size: Math.random() * 3 + 1,
-      duration: 2 + Math.random() * 3,
-      delay: Math.random() * 5,
+
+      // Three star sizes
+      size:
+        Math.random() < 0.65
+          ? 1
+          : Math.random() < 0.9
+          ? 2
+          : 3.5,
+
+      // Different brightness
+      opacity: 0.15 + Math.random() * 0.75,
+
+      // Different twinkle speed
+      duration: 3 + Math.random() * 7,
+
+      delay: Math.random() * 6,
     }));
 
-    setStars(generatedStars);
+    setStars(generated);
   }, []);
 
   return (
@@ -39,10 +53,21 @@ export default function Stars() {
             left: `${star.left}%`,
             width: `${star.size}px`,
             height: `${star.size}px`,
+            opacity: star.opacity,
+
+            // Soft glow
+            boxShadow:
+              star.size > 2
+                ? "0 0 10px rgba(255,255,255,.8)"
+                : "0 0 4px rgba(255,255,255,.35)",
           }}
           animate={{
-            opacity: [0.2, 1, 0.2],
-            scale: [1, 1.4, 1],
+            opacity: [
+              star.opacity * 0.35,
+              star.opacity,
+              star.opacity * 0.35,
+            ],
+            scale: [1, 1.35, 1],
           }}
           transition={{
             duration: star.duration,

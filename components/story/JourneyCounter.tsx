@@ -5,8 +5,10 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Emoji from "@/components/ui/Emoji";
 
+
+const START_DATE = new Date("2023-07-22T00:00:00");
+
 export default function JourneyCounter() {
-  const startDate = new Date("2023-07-22T00:00:00");
 
   const [time, setTime] = useState({
     years: 0,
@@ -19,13 +21,13 @@ export default function JourneyCounter() {
     const update = () => {
       const now = new Date();
 
-      const diff = now.getTime() - startDate.getTime();
+      const diff = now.getTime() - START_DATE.getTime();
 
       const totalMinutes = Math.floor(diff / 60000);
       const totalHours = Math.floor(diff / 3600000);
       const totalDays = Math.floor(diff / 86400000);
 
-      const years = now.getFullYear() - startDate.getFullYear();
+      const years = now.getFullYear() - START_DATE.getFullYear();
 
       setTime({
         years,
@@ -102,7 +104,7 @@ export default function JourneyCounter() {
 
         {/* Quote */}
         <div className="mt-10 flex flex-wrap items-center justify-center gap-2 text-center italic leading-8 text-pink-200">
-          <span>"Every second with you has been my favorite memory."</span>
+          <span>&quot;Every second with you has been my favorite memory.&quot;</span>
           <Emoji name="pleading" size={22} />
           <Emoji name="heart" size={22} />
         </div>

@@ -1,3 +1,6 @@
+
+/* eslint-disable react-hooks/purity */
+
 "use client";
 
 import { motion } from "framer-motion";

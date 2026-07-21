@@ -16,7 +16,9 @@ export default function GlassCard() {
         repeat: Infinity,
       }}
     >
-      <LiquidGlass className="relative w-full max-w-md p-10">
+      <LiquidGlass className="relative w-full max-w-md overflow-hidden p-10">
+
+       
 
         {/* Top Title */}
         <div className="flex items-center justify-center gap-3 text-sm uppercase tracking-[0.45em] text-pink-300">
@@ -26,13 +28,42 @@ export default function GlassCard() {
         </div>
 
         {/* Heading */}
-        <h1 className="heading-font mt-8 text-center text-6xl font-semibold leading-none text-white">
-          Happy
-        </h1>
+<h1
+  className="
+    heading-font
+    mt-8
+    text-center
+    text-6xl
+    md:text-7xl
+    font-semibold
+    tracking-tight
+    leading-none
+    text-white
+    drop-shadow-[0_0_25px_rgba(255,255,255,0.15)]
+  "
+>
+  Happy
+</h1>
 
-        <h2 className="heading-font mt-2 text-center text-5xl text-white">
-          3rd Anniversary
-        </h2>
+<h2
+  className="
+    heading-font
+    mt-3
+    text-center
+    text-5xl
+    md:text-6xl
+    font-light
+    tracking-wide
+    bg-gradient-to-r
+    from-pink-200
+    via-white
+    to-purple-200
+    bg-clip-text
+    text-transparent
+  "
+>
+  3rd Anniversary
+</h2>
 
         {/* Heart */}
         <motion.div
@@ -41,9 +72,10 @@ export default function GlassCard() {
             scale: [1, 1.12, 1],
           }}
           transition={{
-            repeat: Infinity,
-            duration: 1.5,
-          }}
+  duration: 2.2,
+  repeat: Infinity,
+  ease: "easeInOut",
+}}
         >
           <Emoji name="heart" size={74} />
         </motion.div>
