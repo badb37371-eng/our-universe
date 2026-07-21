@@ -17,7 +17,7 @@ export default function Stars() {
   const [stars, setStars] = useState<Star[]>([]);
 
   useEffect(() => {
-    const generated = Array.from({ length: 160 }, (_, i) => ({
+    const generated = Array.from({ length: 80 }, (_, i) => ({
       id: i,
       top: Math.random() * 100,
       left: Math.random() * 100,

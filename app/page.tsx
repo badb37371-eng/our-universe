@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import VideoGallery from "@/components/gallery/VideoGallery";
 import AudioProvider from "@/components/music/AudioProvider";
 import MusicEffects from "@/components/effects/MusicEffects";
@@ -37,7 +37,19 @@ import MusicPlayer from "@/components/music/MusicPlayer";
 
 export default function Home() {
   const [started, setStarted] = useState(false);
-  const [showMusicModal, setShowMusicModal] = useState(false);
+const [showMusicModal, setShowMusicModal] = useState(false);
+
+const [isMobile, setIsMobile] = useState(false);
+
+useEffect(() => {
+  const check = () => setIsMobile(window.innerWidth < 768);
+
+  check();
+
+  window.addEventListener("resize", check);
+
+  return () => window.removeEventListener("resize", check);
+}, []);
 
   return (
     <AudioProvider>
@@ -53,19 +65,21 @@ export default function Home() {
   <Background />
 </div>
 
-<div data-depth="2" className="parallax">
-  <Aurora />
-</div>
+{!isMobile && (
+  <div data-depth="2" className="parallax">
+    <Aurora />
+  </div>
+)}
 
 <div data-depth="3" className="parallax">
   <Stars />
 </div>
 
-<ShootingStar />
+{!isMobile && <ShootingStar />}
 
-<FloatingAppleEmojis />
+<FloatingAppleEmojis isMobile={isMobile} />
 
-<MusicEffects />
+{!isMobile && <MusicEffects />}
 
         {/* Welcome */}
         {!started && (
@@ -94,53 +108,25 @@ export default function Home() {
           <>
             <Hero />
 
-            <div className="relative h-24 overflow-hidden">
-  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-pink-500/5 to-transparent" />
-</div>
-
             <JourneyCounter />
 
             <MemorySection />
 
             <Gallery />
 
-            <div className="relative h-20 overflow-hidden">
-  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-fuchsia-500/5 to-transparent" />
-</div>
-
            <VideoGallery />
-
-            <div className="relative h-20 overflow-hidden">
-  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-pink-500/5 to-transparent" />
-</div>
 
             <RelationshipStats />
 
-            <div className="relative h-20 overflow-hidden">
-  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent" />
-</div>
-
             <Reasons />
-
-            <div className="relative h-20 overflow-hidden">
-  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-pink-500/5 to-transparent" />
-</div>
 
             <FloatingLoveNotes />
 
             <Timeline />
 
-            <div className="relative h-20 overflow-hidden">
-  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent" />
-</div>
-
             <PromiseLetter />
 
             <Dreams />
-
-            <div className="relative h-20 overflow-hidden">
-  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-pink-500/5 to-transparent" />
-</div>
 
             <LongDistance />
 
@@ -148,15 +134,7 @@ export default function Home() {
 
             <MemoryCapsule />
 
-            <div className="relative h-20 overflow-hidden">
-  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-fuchsia-500/5 to-transparent" />
-</div>
-
             <LetterSection />
-
-            <div className="relative h-20 overflow-hidden">
-  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-pink-500/5 to-transparent" />
-</div>
 
             <Finale />
 

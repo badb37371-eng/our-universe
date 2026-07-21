@@ -70,7 +70,7 @@ duration-500
   transition={{
     duration: 4,
     repeat: Infinity,
-    repeatDelay: 3,
+    repeatDelay: 8,
     ease: "easeInOut",
   }}
 />

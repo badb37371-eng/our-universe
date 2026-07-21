@@ -28,7 +28,7 @@ export default function LiquidGlass({
         border
         border-white/10
         bg-white/[0.07]
-        backdrop-blur-[35px]
+        backdrop-blur-[2x1]
         shadow-[0_20px_80px_rgba(0,0,0,.35)]
         ${className}
       `}

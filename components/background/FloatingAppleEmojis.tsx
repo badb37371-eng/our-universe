@@ -25,10 +25,23 @@ type FloatingEmoji = {
   delay: number;
 };
 
-export default function FloatingAppleEmojis() {
+type Props = {
+  isMobile?: boolean;
+};
+
+export default function FloatingAppleEmojis({
+  isMobile = false,
+}: Props) {
+
   const { playing } = useAudio();
 
-  const total = playing ? 18 : 8;
+  const total = isMobile
+  ? playing
+    ? 6
+    : 3
+  : playing
+    ? 18
+    : 8;
 
   const [floatingEmojis, setFloatingEmojis] = useState<FloatingEmoji[]>([]);
 

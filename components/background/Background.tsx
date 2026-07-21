@@ -28,7 +28,7 @@ export default function Background() {
           w-[520px]
           rounded-full
           bg-pink-500/12
-          blur-[180px]
+          blur-[120px]
         "
       />
 
@@ -52,7 +52,7 @@ export default function Background() {
           w-[620px]
           rounded-full
           bg-violet-500/10
-          blur-[220px]
+          blur-[100px]
         "
       />
 
@@ -77,7 +77,7 @@ export default function Background() {
           -translate-x-1/2
           rounded-full
           bg-sky-500/8
-          blur-[240px]
+          blur-[80px]
         "
       />
 
@@ -102,7 +102,7 @@ export default function Background() {
           -translate-y-1/2
           rounded-full
           bg-white
-          blur-[220px]
+          blur-[150px]
         "
       />
     </>
